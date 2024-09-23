@@ -10,11 +10,12 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  //
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(itemBuilder: (context, index) {
-      return Card(child: Text(widget.posts[index].title));
-    });
+    return new ListView.builder(
+        itemCount: widget.posts.length,
+        itemBuilder: (context, index) {
+          return Card(child: Text(widget.posts[index].title));
+        });
   }
 }

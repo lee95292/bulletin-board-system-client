@@ -12,24 +12,54 @@ Min Value Product
 - 첨부파일 > SSO(email)> 추천 > admin > community?
  */
 void main() {
-  runApp(MyApp());
+  runApp(BBS());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class BBS extends StatefulWidget {
+  BBS({super.key});
 
+  @override
+  State<BBS> createState() => _BBSState();
+}
+
+class _BBSState extends State<BBS> {
   List<Post> posts = [Post('1', 'marco', 'hahaha', 'How do i Learn Flutter?')];
+  bool isWriting = false;
+  void toggleWriting() {
+    setState(() {
+      this.isWriting = !this.isWriting;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bulletin Board System',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Board(
-        posts: posts,
-      ),
-    );
+        title: 'Bulletin Board System',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("title"),
+          ),
+          body: Stack(
+            children: [
+              Board(
+                title: 'BBS',
+                posts: posts,
+              ),
+              if (isWriting)
+                Container(
+                  child: Text('write'),
+                )
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            tooltip: 'add a post',
+            onPressed: toggleWriting,
+          ),
+        ));
   }
 }
