@@ -13,17 +13,17 @@ class Post {
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
-    map['id'] = this._id;
-    map['title'] = this._title;
-    map['author'] = this._author;
-    map['content'] = this._content;
+    map['id'] = _id;
+    map['title'] = _title;
+    map['author'] = _author;
+    map['content'] = _content;
     return map;
   }
 
   Post.map(dynamic obj) {
-    this._id = obj['id'];
-    this._title = obj['title'];
-    this._author = obj['author'];
-    this._content = obj['contnet'];
+    _id = obj['id'];
+    _title = obj['title'];
+    _author = obj['author'];
+    _content = obj['contnet'];
   }
 }
