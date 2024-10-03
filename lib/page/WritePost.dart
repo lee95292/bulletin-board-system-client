@@ -18,21 +18,16 @@ class _WritePostState extends State<WritePost> {
   final TextEditingController _contentController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).colorScheme.primary);
     return Container(
       // Outter Box Container
-      color: Colors.black.withOpacity(0.2),
+      color: Theme.of(context).colorScheme.background,
       alignment: Alignment(0, 1),
 
       // Inner Box
       child: Container(
           height: MediaQuery.of(context).size.height * 0.8,
           width: MediaQuery.of(context).size.width * 0.99,
-          // color: Theme.of(context).colorScheme.primary, // TODO contenxt 에서 colortheme 못불러옴;;
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 2),
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey.withOpacity(1)),
+          // decoration: BoxDecoration(color: Colors.white12.withOpacity(1)),
           padding: const EdgeInsets.all(10),
           child: SingleChildScrollView(
             child: Column(
@@ -50,10 +45,12 @@ class _WritePostState extends State<WritePost> {
                 ),
                 Container(
                   alignment: Alignment.bottomLeft,
-                  child: TextButton(
-                      onPressed: () => widget.addPost(
-                          _titleController.text, _contentController.text),
-                      child: Text('등록')), // TODO 등록 버튼이 화면의 좌하단에 고정되도록
+                  color: Theme.of(context).colorScheme.background,
+                  child: Center(
+                      child: TextButton(
+                          onPressed: () => widget.addPost(
+                              _titleController.text, _contentController.text),
+                          child: Text('등록'))), // TODO 등록 버튼이 화면의 좌하단에 고정되도록
                 )
               ],
             ),

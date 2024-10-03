@@ -1,3 +1,4 @@
+import 'package:bulltin_board_system/page/Article.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../model/Post.dart';
@@ -17,17 +18,21 @@ class _BoardState extends State<Board> {
         itemCount: widget.posts.length,
         itemBuilder: (context, index) {
           return Card(
-              child: Padding(
-                  // height: 60,
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(flex: 3, child: Text(widget.posts[index].title)),
-                      Expanded(
-                          flex: 1, child: Text(widget.posts[index].author)),
-                    ],
-                  )));
+              child: InkWell(
+                  onTap: () => Navigator.of(context).pushNamed('article',
+                      arguments: {'id': widget.posts[index].id}),
+                  child: Padding(
+                      // height: 60,
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                              flex: 3, child: Text(widget.posts[index].title)),
+                          Expanded(
+                              flex: 1, child: Text(widget.posts[index].author)),
+                        ],
+                      ))));
         });
   }
 }
