@@ -3,10 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import '../model/Comment.dart';
+
 class Article extends StatefulWidget {
-  const Article({super.key});
+  Article({super.key});
   @override
   State<Article> createState() => _ArticleState();
+  List<Comment> comments = [
+    Comment('1', 'marco', 'How do i Learn Flutter?'),
+    Comment('2', '졸려', '대한민국 직장인 평균 수면시간은??'),
+    Comment('3', '퇴근시켜줘', '주식 대박 가즈앗'),
+    Comment('4', '플러터 귀찮', '플러터 공부법 추천좀?'),
+    Comment('1', 'marco', 'How do i Learn Flutter?'),
+    Comment('2', '졸려', '대한민국 직장인 평균 수면시간은??'),
+    Comment('3', '퇴근시켜줘', '주식 대박 가즈앗'),
+    Comment('4', '플러터 귀찮', '플러터 공부법 추천좀?'),
+    Comment('1', 'marco', 'How do i Learn Flutter?'),
+    Comment('2', '졸려', '대한민국 직장인 평균 수면시간은??'),
+    Comment('3', '퇴근시켜줘', '주식 대박 가즈앗'),
+    Comment('4', '플러터 귀찮', '플러터 공부법 추천좀?'),
+    Comment('1', 'marco', 'How do i Learn Flutter?'),
+    Comment('2', '졸려', '대한민국 직장인 평균 수면시간은??'),
+    Comment('3', '퇴근시켜줘', '주식 대박 가즈앗'),
+    Comment('4', '플러터 귀찮', '플러터 공부법 추천좀?')
+  ];
 }
 
 class _ArticleState extends State<Article> {
@@ -64,9 +84,24 @@ class _ArticleState extends State<Article> {
               ),
               //Comment
               Container(
-                margin: EdgeInsets.all(10),
-                child: Text("asd"),
-              )
+                  margin: EdgeInsets.all(8),
+                  child: Column(
+                    children: widget.comments
+                        .map((comment) => Card(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(comment.content),
+                                    Text(comment.author)
+                                  ],
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ))
             ],
           ),
         ),

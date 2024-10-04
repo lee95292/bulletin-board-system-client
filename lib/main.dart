@@ -27,10 +27,12 @@ class BBS extends StatefulWidget {
 
 class _BBSState extends State<BBS> {
   List<Post> posts = [
-    Post('1', 'marco', 'hahaha', 'How do i Learn Flutter?'),
-    Post('2', '졸려', 'hahaha', '대한민국 직장인 평균 수면시간은??'),
-    Post('3', '퇴근시켜줘', 'hahaha', '주식 대박 가즈앗'),
-    Post('4', '플러터 귀찮', 'hahah', '플러터 공부법 추천좀?')
+    Post.fromJson({
+      'id': '1',
+      'author': 'marco',
+      'content': 'hahaha',
+      'title': 'How do i Learn Flutter?'
+    }),
   ];
   var isWriting = false;
   int _selectedIndex = 0;
@@ -50,7 +52,8 @@ class _BBSState extends State<BBS> {
     var id = 'test_id'; // @TODO UUID
     var author = 'anonymous'; // @TODO nickname(SSO)
     setState(() {
-      posts.add(Post(id, author, title, content));
+      posts.add(Post.fromJson(
+          {'id': id, 'author': author, 'title': title, 'content': content}));
       isWriting = !this.isWriting;
     });
   }

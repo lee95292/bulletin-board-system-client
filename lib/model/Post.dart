@@ -1,15 +1,24 @@
 class Post {
-  late String _id;
-  late String _title;
-  late String _author;
-  late String _content;
+  late String id;
+  late String title;
+  late String author;
+  late String content;
 
-  String get id => _id;
-  String get title => _title;
-  String get author => _author;
-  String get content => _content;
+  String get _id => id;
+  String get _title => title;
+  String get _author => author;
+  String get _content => content;
 
-  Post(this._id, this._author, this._content, this._title);
+  // Post.fromJson(Map<String, dynamic> map,
+  //     {required this.id,
+  //     required this.author,
+  //     required this.content,
+  //     required this.title});
+  Post.fromJson(Map<String, dynamic> map)
+      : id = map['id'],
+        title = map['title'],
+        author = map['author'],
+        content = map['contnet'];
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
@@ -21,9 +30,9 @@ class Post {
   }
 
   Post.map(dynamic obj) {
-    _id = obj['id'];
-    _title = obj['title'];
-    _author = obj['author'];
-    _content = obj['contnet'];
+    id = obj['id'];
+    title = obj['title'];
+    author = obj['author'];
+    content = obj['contnet'];
   }
 }
