@@ -33,8 +33,6 @@ class _ArticleState extends State<Article> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
-    var _colorScheme = Theme.of(context).colorScheme;
-    var _mediaSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(),

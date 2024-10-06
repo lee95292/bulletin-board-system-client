@@ -1,8 +1,11 @@
+import 'package:bulltin_board_system/controller/UserController.dart';
 import 'package:bulltin_board_system/page/Article.dart';
+import 'package:bulltin_board_system/page/Auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import './model/Post.dart';
-import './page/board.dart';
+import 'page/Board.dart';
 import 'page/WritePost.dart';
 
 /*
@@ -26,6 +29,7 @@ class BBS extends StatefulWidget {
 }
 
 class _BBSState extends State<BBS> {
+  final userController = Get.put(UserController());
   List<Post> posts = [
     Post.fromJson({
       'id': '1',
@@ -36,6 +40,7 @@ class _BBSState extends State<BBS> {
   ];
   var isWriting = false;
   int _selectedIndex = 0;
+
   void _onBotNavItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -72,16 +77,19 @@ class _BBSState extends State<BBS> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'Bulletin Board System',
-        routes: {'article': (contenxt) => Article()},
+        routes: {
+          'article': (contenxt) => Article(),
+          'auth': (context) => Auth()
+        },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Just a BBS"),
+            title: Obx(() => Text(userController.user.value.name)),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
@@ -100,7 +108,7 @@ class _BBSState extends State<BBS> {
           floatingActionButton: FloatingActionButton(
             child: isWriting ? Icon(Icons.remove) : Icon(Icons.add),
             tooltip: 'add a post',
-            onPressed: toggleWriting,
+            onPressed: userController.login,
           ),
         ));
   }

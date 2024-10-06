@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Comment {
   late String id;
   late String author;

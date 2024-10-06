@@ -18,13 +18,12 @@ class _WritePostState extends State<WritePost> {
   final TextEditingController _contentController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
       // Outter Box Container
-      color: Theme.of(context).colorScheme.background,
-      alignment: Alignment(0, 1),
-
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(),
       // Inner Box
-      child: Container(
+      body: Container(
           height: MediaQuery.of(context).size.height * 0.8,
           width: MediaQuery.of(context).size.width * 0.99,
           // decoration: BoxDecoration(color: Colors.white12.withOpacity(1)),
