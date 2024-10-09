@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import './model/Post.dart';
 import 'page/Board.dart';
 import 'page/WritePost.dart';
+import 'page/Routes.dart';
 
 /*
 Min Value Product
@@ -38,18 +39,11 @@ class _BBSState extends State<BBS> {
       'title': 'How do i Learn Flutter?'
     }),
   ];
-  var isWriting = false;
   int _selectedIndex = 0;
 
   void _onBotNavItemTap(int index) {
     setState(() {
       _selectedIndex = index;
-    });
-  }
-
-  void toggleWriting() {
-    setState(() {
-      this.isWriting = !this.isWriting;
     });
   }
 
@@ -59,7 +53,6 @@ class _BBSState extends State<BBS> {
     setState(() {
       posts.add(Post.fromJson(
           {'id': id, 'author': author, 'title': title, 'content': content}));
-      isWriting = !this.isWriting;
     });
   }
 
@@ -72,6 +65,7 @@ class _BBSState extends State<BBS> {
         posts: posts,
       ),
       WritePost(addPost: this.addPost),
+      Auth()
     ];
   }
 
@@ -79,17 +73,20 @@ class _BBSState extends State<BBS> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: 'Bulletin Board System',
-        routes: {
-          'article': (contenxt) => Article(),
-          'auth': (context) => Auth()
-        },
+        getPages: [
+          GetPage(name: Routes.Auth, page: () => Auth()),
+          GetPage(name: Routes.Article, page: () => Article()),
+          GetPage(name: Routes.Board, page: () => Board(posts: posts)),
+          GetPage(
+              name: Routes.WritePost, page: () => WritePost(addPost: addPost))
+        ],
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Obx(() => Text(userController.user.value.name)),
+            title: Obx(() => Text(userController.isLoggin.toString())),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
@@ -100,16 +97,17 @@ class _BBSState extends State<BBS> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.post_add),
                 label: "Write Post",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "My Page",
               )
             ],
             onTap: _onBotNavItemTap,
           ),
           body: _listBottomNav.elementAt(_selectedIndex),
-          floatingActionButton: FloatingActionButton(
-            child: isWriting ? Icon(Icons.remove) : Icon(Icons.add),
-            tooltip: 'add a post',
-            onPressed: userController.login,
-          ),
+          floatingActionButton:
+              FloatingActionButton(onPressed: userController.login),
         ));
   }
 }

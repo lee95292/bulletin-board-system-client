@@ -1,6 +1,8 @@
 import 'package:bulltin_board_system/page/Article.dart';
+import 'package:bulltin_board_system/page/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import '../model/Post.dart';
 
 class Board extends StatefulWidget {
@@ -19,7 +21,7 @@ class _BoardState extends State<Board> {
         itemBuilder: (context, index) {
           return Card(
               child: InkWell(
-                  onTap: () => Navigator.of(context).pushNamed('article',
+                  onTap: () => Get.toNamed(Routes.Article,
                       arguments: {'id': widget.posts[index].id}),
                   child: Padding(
                       // height: 60,

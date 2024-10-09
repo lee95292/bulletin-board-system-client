@@ -12,5 +12,6 @@ class UserController extends GetxController {
       user?.id = '1';
       user?.name = 'marco lee';
     });
+    isLoggin.value = true;
   }
 }

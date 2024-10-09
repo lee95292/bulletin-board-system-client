@@ -4,16 +4,6 @@ class Post {
   late String author;
   late String content;
 
-  String get _id => id;
-  String get _title => title;
-  String get _author => author;
-  String get _content => content;
-
-  // Post.fromJson(Map<String, dynamic> map,
-  //     {required this.id,
-  //     required this.author,
-  //     required this.content,
-  //     required this.title});
   Post.fromJson(Map<String, dynamic> map)
       : id = map['id'],
         title = map['title'],
@@ -22,10 +12,10 @@ class Post {
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
-    map['id'] = _id;
-    map['title'] = _title;
-    map['author'] = _author;
-    map['content'] = _content;
+    map['id'] = id;
+    map['title'] = title;
+    map['author'] = author;
+    map['content'] = content;
     return map;
   }
 
